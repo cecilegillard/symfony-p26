@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>{{ article.titre }}</h1>
+    <p>{{ article.contenu }}</p>
+    <p>Crée le {{ article.datecreation | date("d/m/Y h:i:s") }}</p>
+    <p>Catégorie : {{ article.categorie.nom }}</p>
+    <a href="{{ path('app_article') }}">Retour à la liste des articles</a>
+</div>
+{% endblock %}

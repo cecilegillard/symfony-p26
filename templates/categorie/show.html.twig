@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>{{ categorie.nom }}</h1>
+
+    {% for article in categorie.articles %}
+        <a href="{{ path('app_article_show', { 'id': article.id }) }}">{{ article.titre }}</a>
+        <br>
+    {% else %}
+      <p> Aucune article associé à cette catégorie !</p>
+    {%  endfor %}
+    <br>
+    <a href="{{ path('app_categorie') }}">Retour à la liste des catégories</a>
+</div>
+{% endblock %}
