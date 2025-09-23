@@ -15,7 +15,7 @@
         <a href="{{ path('app_article_show', { 'id': article.id }) }}">{{ article.titre }}</a>
         <br>
     {% else %}
-      <p> Aucune article associé à cette catégorie !</p>
+      <p> Aucun article associé à cette catégorie !</p>
     {%  endfor %}
     <br>
     <a href="{{ path('app_categorie') }}">Retour à la liste des catégories</a>
