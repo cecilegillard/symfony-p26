@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\ArticleType;
+use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -17,6 +21,23 @@ final class ArticleController extends AbstractController
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);
+    }
+
+    #[Route('/article/add', name: 'app_article_add')]
+    public function add(Request $request, EntityManagerInterface $entityManager) {
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // on demande à Doctrine de s'occuper de l'object
+            $entityManager->persist($article);
+            // On execute les instructions SQL
+            $entityManager->flush();
+            return $this->redirectToRoute('app_article');
+        }
+
+        return $this->render('article/add.html.twig',
+            ["form" => $form]);
     }
 
     #[Route('/article/{id}', name: 'app_article_show')]
