@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ArticleController extends AbstractController
 {
@@ -24,6 +25,7 @@ final class ArticleController extends AbstractController
     }
 
     #[Route('/article/add', name: 'app_article_add')]
+    #[IsGranted("ROLE_USER")]
     public function add(Request $request, EntityManagerInterface $entityManager) {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
