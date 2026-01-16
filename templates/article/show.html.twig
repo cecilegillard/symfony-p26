@@ -11,7 +11,7 @@
 <div class="example-wrapper">
     <h1>{{ article.titre }}</h1>
     <p>{{ article.contenu }}</p>
-    <p>Crée le {{ article.datecreation | date("d/m/Y h:i:s") }}</p>
+    <p>Crée par {{ article.auteur.prenom | default('N/A') }} le {{ article.datecreation | date("d/m/Y h:i:s") }}</p>
     <p>Catégorie : {{ article.categorie.nom }}</p>
     <a href="{{ path('app_article') }}">Retour à la liste des articles</a>
 </div>

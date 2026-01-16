@@ -12,6 +12,16 @@
         {% endblock %}
     </head>
     <body>
+        <nav>
+            <a href="{{ path('app_article') }}">Home</a>
+            {% if app.user %}
+                <a href="{{ path('app_article_add') }}">New Article</a>
+                <a href="{{ path('app_logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ path('app_login') }}">Login</a>
+                <a href="{{ path('app_register') }}">Register</a>
+            {%  endif %}
+        </nav>
         {% block body %}{% endblock %}
     </body>
 </html>

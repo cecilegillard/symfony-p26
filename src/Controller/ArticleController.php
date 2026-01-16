@@ -31,6 +31,8 @@ final class ArticleController extends AbstractController
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // on récupère l'utilisateur connecté
+            $article->setAuteur($this->getUser());
             // on demande à Doctrine de s'occuper de l'object
             $entityManager->persist($article);
             // On execute les instructions SQL

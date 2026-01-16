@@ -13,7 +13,7 @@
     {% for article in articles %}
         <h2>{{ article.titre }}</h2>
         <p>{{ article.contenu }}</p>
-        <p>Crée le {{ article.datecreation | date("d/m/Y h:i:s") }}</p>
+        <p>Crée par {{ article.auteur.prenom | default('N/A') }} le {{ article.datecreation | date("d/m/Y h:i:s") }}</p>
         <a href="{{ path('app_article_show', { 'id': article.id }) }}">Voir l'article</a>
         <br> <hr>
     {% else %}
