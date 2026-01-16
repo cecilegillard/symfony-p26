@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/articlecrud')]
 final class ArticleCrudController extends AbstractController
@@ -23,6 +24,7 @@ final class ArticleCrudController extends AbstractController
     }
 
     #[Route('/new', name: 'app_article_crud_new', methods: ['GET', 'POST'])]
+    #[IsGranted("ROLE_MODERATEUR")]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
