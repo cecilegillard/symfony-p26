@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\ArticleFilterType;
 use App\Form\ArticleType;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
@@ -15,12 +16,27 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class ArticleController extends AbstractController
 {
     #[Route('/article', name: 'app_article')]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(Request $request,ArticleRepository $articleRepository): Response
     {
-        $articles = $articleRepository->findAll();
        // dd($articles);
+        $articles = $articleRepository->findAll();
+
+        $article = new Article();
+        $form = $this->createForm(ArticleFilterType::class, $article);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() ) {
+
+            if (count($article->getTags()) != 0) {
+
+
+                $articles = $articleRepository->getArticlesByTags($article->getTags());
+            }
+        }
+
+
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articles,
+            'articles' => $articles, "formfilter" => $form
         ]);
     }
 
