@@ -21,6 +21,8 @@
                         <li class="nav-item"><a class="nav-link" href="{{ path('app_article') }}">Home</a></li>
                         {% if app.user %}
                             <li class="nav-item">  <a class="nav-link"  href="{{ path('app_article_add') }}">New Article</a> </li>
+                            <li class="nav-item">  <a class="nav-link"  href="{{ path('app_tag_index') }}">Gestion Tags</a> </li>
+
                             <li><a class="nav-link" href="{{ path('app_logout') }}">Logout</a></li>
                         {% else %}
                             <li><a class="nav-link" href="{{ path('app_login') }}">Login</a></li>
